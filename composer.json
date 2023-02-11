@@ -1,0 +1,47 @@
+{
+    "name": "smashed-egg/laravel-in-memory-auth",
+    "description": "This package allows you to enhance your Console Commands by making it easier to add aliases and use interactive functionality.",
+    "keywords": ["php", "laravel", "auth", "authenication"],
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/smashed-egg/laravel-in-memory-auth/issues",
+        "source": "https://github.com/smashed-egg/laravel-in-memory-auth"
+    },
+    "require": {
+        "php": "^8.0.2",
+        "illuminate/console": "^9.21|^10.0",
+        "illuminate/contracts": "^9.21|^10.0",
+        "illuminate/support": "^9.21|^10.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.6|^8.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "SmashedEgg\\LaravelInMemoryAuth\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmashedEgg\\LaravelInMemoryAuth\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tom Ellis"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
