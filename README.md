@@ -40,20 +40,24 @@ Add also setup your in memory users:
 ```php
 'memory' => [
     'model' => \Illuminate\Auth\GenericUser::class,
+    'username_field' => 'email',
     'users' => [
 
         /*
-         'username' => [
+         'me@email.com' => [
             'id' => 1,
+            'name' => 'My name',
             // Hashed password using the hasher service
             'password' => 'hashed_password',
         ],
          */
 
-        'admin' => [
+        'admin@example.com' => [
             'id' => 1,
+            'name' => 'Barry Allen'
             // Hashed password using the hasher service
             'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',
+            
         ],
     ],
 ],

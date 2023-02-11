@@ -76,7 +76,8 @@ class InMemoryUserProviderTest extends TestCase
      */
     protected function getProvider(Hasher $hasher)
     {
-        return new InMemoryUserProvider($hasher, [
+        return new InMemoryUserProvider($hasher,
+            'username', [
             'admin' => [
                 'id' => 1,
                 'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',

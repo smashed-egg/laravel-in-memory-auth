@@ -11,6 +11,7 @@ class InMemoryUserProvider implements UserProvider
 {
     public function __construct(
         protected Hasher $hasher,
+        protected string $usernameField,
         protected array $users,
         protected string $model = GenericUser::class
     ) {}
@@ -56,7 +57,7 @@ class InMemoryUserProvider implements UserProvider
      */
     public function updateRememberToken(Authenticatable $user, $token): void
     {
-        $this->users[$user->username][$user->getRememberTokenName()] = $token;
+        $this->users[$user->{$this->usernameField}][$user->getRememberTokenName()] = $token;
     }
 
     /**
@@ -67,7 +68,7 @@ class InMemoryUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials): ?Authenticatable
     {
-        $username = $credentials['username'];
+        $username = $credentials[$this->usernameField];
 
         if ( ! isset($this->users[$username])) {
             return null;

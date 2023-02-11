@@ -4,6 +4,7 @@ namespace SmashedEgg\LaravelInMemoryAuth;
 
 use Illuminate\Auth\GenericUser;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use SmashedEgg\LaravelInMemoryAuth\Commands\HashPasswordCommand;
 
@@ -16,11 +17,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->extend('memory', function(Application $app) {
+        Auth::provider('memory', function(Application $app) {
             return new InMemoryUserProvider(
                 $app->make('hash'),
-                config('auth.memory.users', []),
-                config('auth.memory.model', GenericUser::class)
+                config('auth.providers.memory.username_field', 'email'),
+                config('auth.providers.memory.users', []),
+                config('auth.providers.memory.model', GenericUser::class)
             );
         });
 
