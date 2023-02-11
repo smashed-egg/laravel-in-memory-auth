@@ -3,6 +3,7 @@
 namespace SmashedEgg\LaravelInMemoryAuth\Tests;
 
 use Illuminate\Auth\GenericUser;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Hashing\Hasher;
 use SmashedEgg\LaravelInMemoryAuth\InMemoryUserProvider;
 
@@ -15,9 +16,7 @@ class InMemoryUserProviderTest extends TestCase
 {
     public function testProviderRetrieveById()
     {
-        $hasher = $this->createMock(Hasher::class);
-
-        $provider = $this->getProvider($hasher);
+        $provider = $this->getProvider($this->app->make('hash'));
 
         $this->assertInstanceOf(GenericUser::class, $provider->retrieveById(1));
         $this->assertNull($provider->retrieveById(2));
@@ -25,9 +24,7 @@ class InMemoryUserProviderTest extends TestCase
 
     public function testProviderRetrieveByToken()
     {
-        $hasher = $this->createMock(Hasher::class);
-
-        $provider = $this->getProvider($hasher);
+        $provider = $this->getProvider($this->app->make('hash'));
 
         $this->assertInstanceOf(GenericUser::class, $provider->retrieveByToken(1, 'token'));
         $this->assertNull($provider->retrieveByToken(1, 'non_existent_token'));
@@ -36,9 +33,7 @@ class InMemoryUserProviderTest extends TestCase
 
     public function testProviderUpdateRememberToken()
     {
-        $hasher = $this->createMock(Hasher::class);
-
-        $provider = $this->getProvider($hasher);
+        $provider = $this->getProvider($this->app->make('hash'));
 
         $user = $provider->retrieveById(1);
 
@@ -48,9 +43,7 @@ class InMemoryUserProviderTest extends TestCase
 
     public function testProviderRetrieveByCredentials()
     {
-        $hasher = $this->createMock(Hasher::class);
-
-        $provider = $this->getProvider($hasher);
+        $provider = $this->getProvider($this->app->make('hash'));
 
         $this->assertInstanceOf(GenericUser::class, $provider->retrieveByCredentials([
             'username' => 'admin'
@@ -63,15 +56,13 @@ class InMemoryUserProviderTest extends TestCase
 
     public function testProviderValidateCredentials()
     {
-        $hasher = $this->createMock(Hasher::class);
-
-        $hasher->expects($this->once())
-            ->method('check')
-            ->will($this->returnValue(true))
+        $user = $this->createMock(GenericUser::class);
+        $user->expects($this->once())
+            ->method('getAuthPassword')
+            ->willReturn('$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK')
         ;
 
-        $user = $this->createMock(GenericUser::class);
-        $provider = $this->getProvider($hasher);
+        $provider = $this->getProvider($this->app->make('hash'));
 
         $this->assertTrue($provider->validateCredentials($user, [
             'username' => 'admin',
@@ -80,15 +71,15 @@ class InMemoryUserProviderTest extends TestCase
     }
 
     /**
-     * @param $hasher
+     * @param Hasher $hasher
      * @return InMemoryUserProvider
      */
-    protected function getProvider($hasher)
+    protected function getProvider(Hasher $hasher)
     {
         return new InMemoryUserProvider($hasher, [
             'admin' => [
                 'id' => 1,
-                'password' => 'sdfsfdsdfsfdsf',
+                'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',
                 'remember_token' => 'token',
             ]
         ]);

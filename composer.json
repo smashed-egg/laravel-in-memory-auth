@@ -40,6 +40,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "SmashedEgg\\LaravelInMemoryAuth\\AuthServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",

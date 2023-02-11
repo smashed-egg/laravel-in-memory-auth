@@ -32,31 +32,31 @@ composer require smashed-egg/laravel-in-memory-auth
 In the `auth.php` config file you will need to set the driver:
 
 ```php
-    'driver' => 'memory',
+'driver' => 'memory',
 ```
 
 Add also setup your in memory users:
 
 ```php
-    'memory' => [
-        'model' => \Illuminate\Auth\GenericUser::class,
-        'users' => [
-    
-            /*
-             'username' => [
-                'id' => 1,
-                // Hashed password using the hasher service
-                'password' => 'hashed_password',
-            ],
-             */
-    
-            'admin' => [
-                'id' => 1,
-                // Hashed password using the hasher service
-                'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',
-            ],
+'memory' => [
+    'model' => \Illuminate\Auth\GenericUser::class,
+    'users' => [
+
+        /*
+         'username' => [
+            'id' => 1,
+            // Hashed password using the hasher service
+            'password' => 'hashed_password',
+        ],
+         */
+
+        'admin' => [
+            'id' => 1,
+            // Hashed password using the hasher service
+            'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',
         ],
     ],
+],
 ```
 
 You can add any properties you want making it easy to switch out the Auth drivers.

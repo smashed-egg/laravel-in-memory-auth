@@ -21,7 +21,7 @@ class InMemoryUserProvider implements UserProvider
      * @param mixed $identifier
      * @return Authenticatable|null
      */
-    public function retrieveById($identifier)
+    public function retrieveById($identifier): ?Authenticatable
     {
         foreach ($this->users as $username => $fields) {
             if ($fields['id'] === $identifier) {
@@ -39,27 +39,22 @@ class InMemoryUserProvider implements UserProvider
      * @param string $token
      * @return Authenticatable|null
      */
-    public function retrieveByToken($identifier, $token)
+    public function retrieveByToken($identifier, $token): ?Authenticatable
     {
-        if ( ! $user = $this->retrieveById($identifier)) {
-            return null;
-        }
+        $user = $this->retrieveById($identifier);
 
-        if ($token === $user->getRememberToken()) {
-            return $user;
-        }
-
-        return null;
+        return $user && $user->getRememberToken() && hash_equals($user->getRememberToken(), $token)
+            ? $user : null;
     }
 
     /**
      * Update the "remember me" token for the given user in storage.
      *
-     * @param  Authenticatable $user
-     * @param  string $token
+     * @param Authenticatable $user
+     * @param string $token
      * @return void
      */
-    public function updateRememberToken(Authenticatable $user, $token)
+    public function updateRememberToken(Authenticatable $user, $token): void
     {
         $this->users[$user->username][$user->getRememberTokenName()] = $token;
     }
@@ -68,9 +63,9 @@ class InMemoryUserProvider implements UserProvider
      * Retrieve a user by the given credentials.
      *
      * @param  array $credentials
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     * @return Authenticatable|null
      */
-    public function retrieveByCredentials(array $credentials)
+    public function retrieveByCredentials(array $credentials): ?Authenticatable
     {
         $username = $credentials['username'];
 
@@ -84,15 +79,15 @@ class InMemoryUserProvider implements UserProvider
     /**
      * Validate a user against the given credentials.
      *
-     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param Authenticatable $user
      * @param  array $credentials
      * @return bool
      */
-    public function validateCredentials(Authenticatable $user, array $credentials)
+    public function validateCredentials(Authenticatable $user, array $credentials): bool
     {
-        $plain = $credentials['password'];
-
-        return $this->hasher->check($plain, $user->getAuthPassword());
+        return $this->hasher->check(
+            $credentials['password'], $user->getAuthPassword()
+        );
     }
 
     /**
@@ -102,7 +97,7 @@ class InMemoryUserProvider implements UserProvider
      * @param array $fields
      * @return GenericUser
      */
-    protected function getGenericUser($username, array $fields = [])
+    protected function getGenericUser(string $username, array $fields = []): GenericUser
     {
         $fields['username'] = $username;
         $model = $this->getUserClass();
@@ -112,7 +107,7 @@ class InMemoryUserProvider implements UserProvider
     /**
      * @return string
      */
-    protected function getUserClass()
+    protected function getUserClass(): string
     {
         return $this->model;
     }
