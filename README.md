@@ -59,7 +59,7 @@ Add also setup your in memory users:
             'name' => 'Barry Allen'
             // Hashed password using the hasher service
             'password' => '$2y$10$Mfusxb1546MFxQ4A1s4GE.OF/gFuI8Y6Hw9xnlZeiHtjDl0/pnXPK',
-            
+            'remember_token' => '',
         ],
     ],
 ],
