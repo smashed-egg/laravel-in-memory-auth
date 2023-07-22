@@ -4,8 +4,6 @@
 
 # Laravel In Memory Auth Provider
 
-*Still in development*
-
 An In Memory User Auth Provider for Laravel 9+.
 
 Allows you to Authenticate an admin area without the need for a database.
@@ -71,4 +69,13 @@ The package comes with a command for hashing passwords, making it easier to setu
 
 ```shell
 php artisan smashed-egg:hash:password mypassword
+```
 
+## Contributing
+
+Contributing is welcome. Please see our guide [here](.github/CONTRIBUTING.md).
+
+
+## License
+
+This package is open-sourced software licensed under the [MIT license](LICENSE.md).
