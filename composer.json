@@ -1,6 +1,6 @@
 {
     "name": "smashed-egg/laravel-in-memory-auth",
-    "description": "This package allows you to enhance your Console Commands by making it easier to add aliases and use interactive functionality.",
+    "description": "This package allows you to Authenticate an admin area without the need for a database.",
     "keywords": ["php", "laravel", "auth", "authenication"],
     "type": "library",
     "license": "MIT",
