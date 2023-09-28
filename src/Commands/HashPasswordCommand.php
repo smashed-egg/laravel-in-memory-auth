@@ -31,7 +31,7 @@ class HashPasswordCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $this->output->writeln($this->hasher->make($this->argument('password')));
 
