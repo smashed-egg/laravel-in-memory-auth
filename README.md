@@ -3,6 +3,9 @@
 </p>
 
 # Laravel In Memory Auth Provider
+[![Latest Stable Version](https://poser.pugx.org/smashed-egg/laravel-in-memory-auth/v/stable)](https://github.com/smashed-egg/laravel-in-memory-auth/releases)
+[![Downloads this Month](https://img.shields.io/packagist/dm/smashed-egg/laravel-in-memory-auth.svg)](https://packagist.org/packages/smashed-egg/laravel-in-memory-auth)
+
 
 An In Memory User Auth Provider for Laravel 9+.
 
