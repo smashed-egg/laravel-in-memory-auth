@@ -51,7 +51,7 @@ Add also setup your in memory users:
 ```php
 'memory' => [
     'driver' => 'memory',
-    'model' => \Illuminate\Auth\GenericUser::class,
+    'model' => \SmashedEgg\LaravelInMemoryAuth\User::class,
     'username_field' => 'email',
     'users' => [
 
