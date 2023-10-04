@@ -2,7 +2,6 @@
 
 namespace SmashedEgg\LaravelInMemoryAuth;
 
-use Illuminate\Auth\GenericUser;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -13,7 +12,7 @@ class InMemoryUserProvider implements UserProvider
         protected Hasher $hasher,
         protected string $usernameField,
         protected array $users,
-        protected string $model = GenericUser::class
+        protected string $model = User::class
     ) {}
 
     /**
@@ -26,7 +25,7 @@ class InMemoryUserProvider implements UserProvider
     {
         foreach ($this->users as $username => $fields) {
             if ($fields['id'] === $identifier) {
-                return $this->getGenericUser($username, $this->users[$username]);
+                return $this->getUser($username, $this->users[$username]);
             }
         }
 
@@ -74,7 +73,7 @@ class InMemoryUserProvider implements UserProvider
             return null;
         }
 
-        return $this->getGenericUser($username, $this->users[$username]);
+        return $this->getUser($username, $this->users[$username]);
     }
 
     /**
@@ -96,9 +95,9 @@ class InMemoryUserProvider implements UserProvider
      *
      * @param string $username
      * @param array $fields
-     * @return GenericUser
+     * @return User
      */
-    protected function getGenericUser(string $username, array $fields = []): GenericUser
+    protected function getUser(string $username, array $fields = []): User
     {
         $fields['username'] = $username;
         $model = $this->getUserClass();

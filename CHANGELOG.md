@@ -1,10 +1,11 @@
 # Release Notes
 
-1.0.0 - TBD
+1.0.0
+- Make custom User class, so it works with packages like InertiaJS that covert the class to JSON
 
 0.2.0
 - Tidy up logic
-q
+
 0.1.1
 - Fix registering provider. Add config value for username
 
