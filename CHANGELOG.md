@@ -1,7 +1,8 @@
 # Release Notes
 
 1.0.0
-- Make custom User class, so it works with packages like InertiaJS that covert the class to JSON
+- Make custom User class, so it works with packages like InertiaJS that covert the class to JSON.
+- Add support for Laravel 11 and 12.
 
 0.2.0
 - Tidy up logic
