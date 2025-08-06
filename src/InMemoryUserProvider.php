@@ -105,6 +105,21 @@ class InMemoryUserProvider implements UserProvider
     }
 
     /**
+     * Rehash the user's password if required and supported.
+     *
+     * Required for Laravel 12+
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  array  $credentials
+     * @param  bool  $force
+     * @return void
+     */
+    public function rehashPasswordIfRequired(Authenticatable $user, #[\SensitiveParameter] array $credentials, bool $force = false)
+    {
+        // NOOP
+    }
+
+    /**
      * @return string
      */
     protected function getUserClass(): string
