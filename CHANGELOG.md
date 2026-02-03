@@ -1,5 +1,8 @@
 # Release Notes
 
+1.1.0
+- Add PHP 8.5 support
+
 1.0.0
 - Make custom User class, so it works with packages like InertiaJS that covert the class to JSON.
 - Add support for Laravel 11 and 12.
