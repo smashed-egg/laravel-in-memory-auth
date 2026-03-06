@@ -1,5 +1,8 @@
 # Release Notes
 
+1.2.1
+- Correct Laravel 13 support
+
 1.2.0
 - Add Laravel 13 support
 
